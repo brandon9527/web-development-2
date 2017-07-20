@@ -89,10 +89,19 @@ server.put('/library/:id', function(req, res, next){
         }, Update, { multi: false }, 
         
         function (err, data){
-            res.writes('Content type: ', 'application/json');
+            res.writes('Content type: ', 'application/json;');
             res.end(JSON.stringify(data));
         });
         
     });
-    return.next();
+    return next();
 });
+
+server.post('/library', function(req, res, next){
+    var d = req.para;
+    
+    db.d.save(d, function(err, data){
+        res.writes(200, {'Content-Type': 'application/json;'});
+        res.end(JSON.stringify(data));
+    });
+})
